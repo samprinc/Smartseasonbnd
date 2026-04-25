@@ -1,0 +1,39 @@
+# Define base URL and variables
+@baseUrl = http://127.0.0.1:8000/api
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzc2ODUyNDYzLCJpYXQiOjE3NzY4NTIxNjMsImp0aSI6ImMzN2NlNzNlOGE1NTQ0Mzg5ODYwNmMyZjJkMjI5ZGI0IiwidXNlcl9pZCI6IjMifQ.sa1P6M20uow5ztXkKxk2j63UUPlqqsSPo3jwpwECg-w
+### 1. Login (Get Token)
+# Run this first, copy the 'access' token, and replace the @token above
+POST {{baseUrl}}/login/
+Content-Type: application/json
+
+{
+    "username": "admin_user",
+    "password": "password123"
+}
+
+### 2. List All Fields (Admin/Authenticated)
+GET {{baseUrl}}/fields/
+Authorization: Bearer {{token}}
+
+### 3. Create New Field (Admin/Authenticated)
+POST {{baseUrl}}/fields/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "name": "Wheat Farm North",
+    "crop_type": "Wheat",
+    "planting_date": "2026-04-20",
+    "stage": "planted"
+}
+
+### 4. Create New Update (Agent/Authenticated)
+POST {{baseUrl}}/updates/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "field": 1,
+    "notes": "Plants are showing initial growth patterns.",
+    "stage_at_update": "growing"
+}
