@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-y6ne8yy3s5w_i$n!n--nwlsn(87ue)^#g9j_3zk!#o+iyy(+y-'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-fallback-key-for-local-only')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -149,7 +149,7 @@ REST_FRAMEWORK = {
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173", # Your React dev server
-    "https://smartseasonfnd.vercel.app/", # Your React production URL
+    "https://smartseasonfnd.vercel.app", # Your React production URL
 ]
 CORS_ALLOW_CREDENTIALS = True
 
