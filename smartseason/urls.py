@@ -15,14 +15,26 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from django.urls import include
+from django.urls import path, include
+from django.http import JsonResponse
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
 
+# 1. Create a simple welcome view for the root URL
+def api_root_view(request):
+    return JsonResponse({
+        "message": "Welcome to the SmartSeason API",
+        "status": "Online and Healthy",
+        "documentation": "Add /api/ to your requests to access endpoints.",
+        "frontend": "https://smartseasonfnd.vercel.app" # Point them to your real app!
+    })
+
 urlpatterns = [
+    # 2. Add the empty path '' to catch visitors hitting the base domain
+    path('', api_root_view, name='api_root'),
+    
     path('admin/', admin.site.urls),
     path('api/', include('core.urls')),  # Include URLs from the core app
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
