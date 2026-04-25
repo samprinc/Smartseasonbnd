@@ -33,8 +33,7 @@ SECRET_KEY = 'django-insecure-y6ne8yy3s5w_i$n!n--nwlsn(87ue)^#g9j_3zk!#o+iyy(+y-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['smartseasonbnd.onrender.com', 'localhost', '127.0.0.1']
 
 # Application definition
 
@@ -150,7 +149,9 @@ REST_FRAMEWORK = {
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173", # Your React dev server
+    "https://smartseasonfnd.vercel.app/", # Your React production URL
 ]
+CORS_ALLOW_CREDENTIALS = True
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=1), # Token lasts 1 day now
